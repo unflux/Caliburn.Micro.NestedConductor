@@ -1,0 +1,13 @@
+﻿<Window x:Class="Caliburn.Micro.Nested.Conductors.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindowView" Height="300" Width="300" Background="DeepSkyBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="MainWindowView" />
+        <ContentControl Grid.Row="1" x:Name="ActiveItem" />
+    </Grid>
+</Window>
