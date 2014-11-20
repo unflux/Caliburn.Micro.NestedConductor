@@ -1,7 +1,5 @@
 ﻿namespace Caliburn.Micro.Nested.Conductors.Framework
 {
-    using System.Collections.Generic;
-
     public interface IOperationConductor
     {
     }
@@ -10,7 +8,7 @@
     {
         protected readonly IWorkspaceProvider WorkspaceProvider;
 
-        public OperationConductor(IWorkspaceProvider workspaceProvider)
+        protected OperationConductor(IWorkspaceProvider workspaceProvider)
         {
             this.WorkspaceProvider = workspaceProvider;
         }

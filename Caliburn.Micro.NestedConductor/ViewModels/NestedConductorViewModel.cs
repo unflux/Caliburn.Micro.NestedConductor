@@ -6,20 +6,18 @@
     public class NestedConductorViewModel : OperationConductor
     {
         private static int count;
-        private readonly IWorkspaceProvider workspaceProvider;
 
         public NestedConductorViewModel(IWorkspaceProvider workspaceProvider)
             : base(workspaceProvider)
         {
             count = count + 1;
-            this.workspaceProvider = workspaceProvider;
             this.DisplayName = "NestedConductorView " + count;
             Debug.WriteLine("*********** Creating NestedConductorView {0} ***********", count);
         }
 
         private void Display()
         {
-            var @vm = this.workspaceProvider.Make<OperationViewModel>();
+            var @vm = this.WorkspaceProvider.Make<OperationViewModel>();
             this.ActivateItem(@vm);
         }
 
