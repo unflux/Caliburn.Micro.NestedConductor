@@ -72,15 +72,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppBoostrapper.cs" />
+    <Compile Include="Framework\WorkspaceProvider.cs" />
+    <Compile Include="Framework\OperationConductor.cs" />
     <Compile Include="Framework\Workspace.cs" />
     <Compile Include="Framework\NestedConductorProvider.cs" />
-    <Compile Include="ViewModels\AnyViewModel.cs" />
     <Compile Include="ViewModels\ContainerViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NestedConductorViewModel.cs" />
-    <Compile Include="Views\AnyView.xaml.cs">
-      <DependentUpon>AnyView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\OperationViewModel.cs" />
     <Compile Include="Views\ContainerView.xaml.cs">
       <DependentUpon>ContainerView.xaml</DependentUpon>
     </Compile>
@@ -89,6 +88,9 @@
     </Compile>
     <Compile Include="Views\NestedConductorView.xaml.cs">
       <DependentUpon>NestedConductorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OperationView.xaml.cs">
+      <DependentUpon>OperationView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -120,10 +122,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AnyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ContainerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NestedConductorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OperationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

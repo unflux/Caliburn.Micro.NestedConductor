@@ -6,16 +6,16 @@
 
     public class MainWindowViewModel : Conductor<IWorkspace>.Collection.OneActive
     {
-        private readonly IEventAggregator eventAggregator;
-        private readonly IWindowManager windowManager;
-
-        public MainWindowViewModel(IWindowManager windowManager, IEventAggregator eventAggregator,
-            IEnumerable<IWorkspace> workspaces)
+        public MainWindowViewModel(IEnumerable<IWorkspace> workspaces)
         {
-            this.windowManager = windowManager;
-            this.eventAggregator = eventAggregator;
             this.Items.AddRange(workspaces);
-            var @vm = this.Items.FirstOrDefault(e => e.Name == "Container");
+            this.DisplayName = "MainWindow";
+            this.Display();
+        }
+
+        private void Display()
+        {
+            var @vm = this.Items.FirstOrDefault(e => e.GetType() == typeof (ContainerViewModel));
             this.ActivateItem(@vm);
         }
     }

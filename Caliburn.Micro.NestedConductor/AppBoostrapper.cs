@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Windows;
     using Autofac;
-    using Caliburn.Micro;
     using Caliburn.Micro.Nested.Conductors.Framework;
     using Caliburn.Micro.Nested.Conductors.ViewModels;
 
@@ -32,22 +31,20 @@
                    .SingleInstance();
 
             // ViewModel registration
+            // Not registering types which are to be created via facotires
             builder.RegisterType<MainWindowViewModel>()
                    .AsSelf()
                    .SingleInstance();
             builder.RegisterType<ContainerViewModel>()
                    .As<IWorkspace>()
                    .SingleInstance();
-            builder.RegisterType<AnyViewModel>()
-                   .As<IWorkspace>()
-                   .InstancePerDependency();
 
-            //builder.RegisterType<NestedContainerProvider>()
-            //       .As<INestedContainerProvider>()
-            //       .SingleInstance();
+            // Provider registration, could be replaced with delegate factories or Func<T, U>
+            builder.RegisterType<WorkspaceProvider>()
+                   .As<IWorkspaceProvider>()
+                   .SingleInstance();
 
-            builder.Register(ctx => new NestedConductorProvider())
-                   .OnActivated(ctx => ctx.Instance.Workspaces = ctx.Context.Resolve<IEnumerable<IWorkspace>>())
+            builder.RegisterType<NestedConductorProvider>()
                    .As<INestedConductorProvider>()
                    .InstancePerLifetimeScope();
 

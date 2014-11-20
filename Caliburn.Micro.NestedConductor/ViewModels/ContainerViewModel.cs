@@ -1,50 +1,22 @@
 ﻿namespace Caliburn.Micro.Nested.Conductors.ViewModels
 {
-    using System.Collections.ObjectModel;
     using Caliburn.Micro.Nested.Conductors.Framework;
 
-    public class ContainerViewModel : Workspace, IHandle<AddNestedConductor>
+    public class ContainerViewModel : Conductor<NestedConductorViewModel>.Collection.AllActive, IWorkspace
     {
-        private readonly IEventAggregator eventAggregator;
         private readonly INestedConductorProvider nestedConductorProvider;
 
-        private ObservableCollection<NestedConductorViewModel> nestedConductorCollection;
-
-        public ContainerViewModel(IEventAggregator eventAggregator, INestedConductorProvider nestedConductorProvider)
+        public ContainerViewModel(INestedConductorProvider nestedConductorProvider)
         {
-            this.eventAggregator = eventAggregator;
             this.nestedConductorProvider = nestedConductorProvider;
-            this.Name = "Container";
-        }
-
-        public ObservableCollection<NestedConductorViewModel> NestedConductorCollection
-        {
-            get { return this.nestedConductorCollection; }
-            set
-            {
-                this.nestedConductorCollection = value;
-                this.NotifyOfPropertyChange();
-            }
-        }
-
-        public void Handle(AddNestedConductor message)
-        {
-            this.NestedConductorCollection.Add(message.Workspace);
+            this.DisplayName = "ContainerView";
         }
 
         public void AddNestedConductor()
         {
             var @new = this.nestedConductorProvider.Make();
-            if (Equals(this.NestedConductorCollection, null))
-            {
-                this.NestedConductorCollection = new ObservableCollection<NestedConductorViewModel>();
-            }
-            this.NestedConductorCollection.Add(@new);
+            //this.Items.Add(@new);
+            this.ActivateItem(@new);
         }
-    }
-
-    public class AddNestedConductor
-    {
-        public NestedConductorViewModel Workspace { get; set; }
     }
 }

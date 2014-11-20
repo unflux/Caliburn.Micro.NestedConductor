@@ -1,15 +1,33 @@
 ﻿namespace Caliburn.Micro.Nested.Conductors.ViewModels
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
     using Caliburn.Micro.Nested.Conductors.Framework;
 
-    public class NestedConductorViewModel : Conductor<IWorkspace>.Collection.OneActive
+    public class NestedConductorViewModel : OperationConductor
     {
-        public NestedConductorViewModel(IEnumerable<IWorkspace> workspaces)
+        private static int count;
+        private readonly IWorkspaceProvider workspaceProvider;
+
+        public NestedConductorViewModel(IWorkspaceProvider workspaceProvider)
+            : base(workspaceProvider)
         {
-            this.Items.AddRange(workspaces);
-            this.ActivateItem(this.Items.FirstOrDefault(e => e.Name == "AnyView"));
+            count = count + 1;
+            this.workspaceProvider = workspaceProvider;
+            this.DisplayName = "NestedConductorView " + count;
+            Debug.WriteLine("*********** Creating NestedConductorView {0} ***********", count);
+        }
+
+        private void Display()
+        {
+            var @vm = this.workspaceProvider.Make<OperationViewModel>();
+            this.ActivateItem(@vm);
+        }
+
+        protected override void OnActivate()
+        {
+            Debug.WriteLine("*********** Activating NestedConductorView {0} ***********", count);
+            this.Display();
+            base.OnActivate();
         }
     }
 }

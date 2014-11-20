@@ -1,6 +1,5 @@
 ﻿namespace Caliburn.Micro.Nested.Conductors.Framework
 {
-    using System.Collections.Generic;
     using Caliburn.Micro.Nested.Conductors.ViewModels;
 
     public interface INestedConductorProvider
@@ -10,11 +9,16 @@
 
     public class NestedConductorProvider : INestedConductorProvider
     {
-        public IEnumerable<IWorkspace> Workspaces { get; set; }
+        private readonly IWorkspaceProvider operationWorkspaceProvider;
+
+        public NestedConductorProvider(IWorkspaceProvider operationWorkspaceProvider)
+        {
+            this.operationWorkspaceProvider = operationWorkspaceProvider;
+        }
 
         public NestedConductorViewModel Make()
         {
-            return new NestedConductorViewModel(this.Workspaces);
+            return new NestedConductorViewModel(this.operationWorkspaceProvider);
         }
     }
 }
